@@ -115,7 +115,6 @@ namespace Lab1IvanovAGBBO0118DES
 
         private void CutStringIntoBlocks(string input)
         {
-            MessageBox.Show(input.Length.ToString());
             Blocks = new string[(input.Length * sizeOfChar) / sizeOfBlock];
             int lengthOfBlock = input.Length / Blocks.Length;
             for (int i = 0; i < Blocks.Length; i++)
@@ -127,43 +126,17 @@ namespace Lab1IvanovAGBBO0118DES
         private string StringToBinaryFormat(string input)
         {
             string output = "";
-            //string char_binary = "";
             for (int i = 0; i < input.Length; i++)
             {
             string char_binary = Convert.ToString(input[i], 2);
-            //byte[] tempbitstr = Encoding.ASCII.GetBytes(input);
-            //string char_binary = tempbitstr.ToString();
-            //BitArray tempBA = new BitArray(tempbitstr.ToArray());
-            //MessageBox.Show(Encoding.ASCII.GetString(tempBA)); 
-            //MessageBox.Show(tempBA.Length.ToString());
-            /*for (int i = 0; i < tempBA.Length; i++)
-            {
-                if(tempBA[i] == true)
-                {
-                    char_binary = char_binary + "1";
-                }
-                else
-                {
-                    char_binary = char_binary + "0";
-                }
-                MessageBox.Show(char_binary);
-            }
-            */
             while (char_binary.Length < sizeOfChar)
                 {
-                    char_binary = "0" + char_binary; // Доводит длину двоичного кода до 8-и
-                    //MessageBox.Show(char_binary);
+                    char_binary = "0" + char_binary; 
                 }
             output += char_binary;
             }
-            //MessageBox.Show(output);
             return output;
         }
-        /*private string CorrectKeyWord(string input, int lenghKey)
-        {
-
-        }
-        */
         private string StringFromBinaryToNormalFormat(string input)
         {
             string output = "";
@@ -188,8 +161,6 @@ namespace Lab1IvanovAGBBO0118DES
         {
             string L = input.Substring(0, input.Length / 2);
             string R = input.Substring(input.Length / 2, input.Length / 2);
-
-            //return (R + XOR(L, Sbox(f(Pbox_Ext(R), key))));
             return (R + XOR(L, Pbox(Sbox(f(Pbox_Ext(R), key)))));
         }
         private string Pbox_Ext(string input)
@@ -206,7 +177,6 @@ namespace Lab1IvanovAGBBO0118DES
                 { result += input.Substring(((i + 1) * 4), 1); }
                             
             }
-            //MessageBox.Show(input + " ||| " + result);
             return result;
         }
         private string Sbox(string input)
@@ -216,7 +186,6 @@ namespace Lab1IvanovAGBBO0118DES
             string tempi = "";
             string tempj = "";
             int i, j;
-            //MessageBox.Show(input.Length.ToString());
             for (int q = 1; q < 9; q++)
             {
                 tempi = input.Substring((q-1)*6, 1) + input.Substring(((q*6)-1), 1);
@@ -267,7 +236,6 @@ namespace Lab1IvanovAGBBO0118DES
         private string XOR(string s1, string s2)
         {
             string result = "";
-            //MessageBox.Show(s1.Length.ToString()+ "||" + s2.Length.ToString());
             for (int i = 0; i < s1.Length; i++)
             {
                 bool a = Convert.ToBoolean(Convert.ToInt32(s1[i].ToString()));
@@ -278,7 +246,6 @@ namespace Lab1IvanovAGBBO0118DES
                 else
                     result += "0";
             }
-            //MessageBox.Show(result.Length.ToString());
             return result;
         }
         private string f(string s1, string s2)
@@ -322,12 +289,12 @@ namespace Lab1IvanovAGBBO0118DES
         {
             if (radioButton1.Checked == true)
             {
-                if(textBox4.TextLength %8 != 0) { MessageBox.Show("Указанная длина ключа не кратна 8-и!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
+                if(textBox4.TextLength %8 != 0) { MessageBox.Show("The key length is not a multiple of 8!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
                 sizeOfChar = 8;
             }
             else 
             {
-                if (textBox4.TextLength % 4 != 0) { MessageBox.Show("Указанная длина ключа не кратна 4-и!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
+                if (textBox4.TextLength % 4 != 0) { MessageBox.Show("The key length is not a multiple of 4!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
                 sizeOfChar = 16; 
             }
             string mainstr = textBox1.Text;
@@ -336,8 +303,6 @@ namespace Lab1IvanovAGBBO0118DES
             mainstr = StringToRightLength(mainstr, false);
             CutStringIntoBlocks(mainstr);
             key = StringToBinaryFormat(key);
-            //for (int i=0; i<quantityOfRounds - 1; i++) key = KeyToNextRound(key);
-            //MessageBox.Show("Ключ 1-й для дешифровки: " + key);
             KeysGenerator(key);
             for (int j = 0; j < quantityOfRounds; j++)
             {
@@ -353,26 +318,21 @@ namespace Lab1IvanovAGBBO0118DES
         {
             if (radioButton1.Checked == true)
             {
-                if (textBox4.TextLength % 8 != 0) { MessageBox.Show("Указанная длина ключа не кратна 8-и!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
+                if (textBox4.TextLength % 8 != 0) { MessageBox.Show("The key length is not a multiple of 8!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
                 sizeOfChar = 8;
             }
             else
             {
-                if (textBox4.TextLength % 4 != 0) { MessageBox.Show("Указанная длина ключа не кратна 4-и!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
+                if (textBox4.TextLength % 4 != 0) { MessageBox.Show("The key length is not a multiple of 4!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
                 sizeOfChar = 16;
             }
-            string mainstr = textBox1.Text; // Считываем строку
-            string key = textBox4.Text; // Считываем ключ
+            string mainstr = textBox1.Text; 
+            string key = textBox4.Text; 
             quantityOfRounds = Convert.ToInt32(textBox3.Text);
-            mainstr = StringToRightLength(mainstr, true); // Доводим длину введённой строки до кратности 8
-            CutStringIntoBlocks(mainstr); // Нарезаем на блоки двоичных кодов
-            //MessageBox.Show(mainstr);
-            //byte[] tempbitstr = Encoding.ASCII.GetBytes(mainstr);
-            //MessageBox.Show(tempbitstr[1].ToString());
-            //key = CorrectKeyWord(key, mainstr.Length / (2 * Blocks.Length));
+            mainstr = StringToRightLength(mainstr, true); 
+            CutStringIntoBlocks(mainstr); 
             key = StringToBinaryFormat(key);
             KeysGenerator(key);
-            //MessageBox.Show("Ключ 1-й для шифровки: " + key);
             for (int j = 0; j < quantityOfRounds; j++)
             {
                 for (int i = 0; i < Blocks.Length; i++) Blocks[i] = EncodeDES_One_Round(Blocks[i], newkeys[j]);
@@ -389,9 +349,6 @@ namespace Lab1IvanovAGBBO0118DES
         {
             string L = input.Substring(0, input.Length / 2);
             string R = input.Substring(input.Length / 2, input.Length / 2);
-            //MessageBox.Show(L.Length.ToString() + "|||||" + R.Length.ToString());
-            //return (XOR(Sbox(f(Pbox_Ext(L), key)), R) + L);
-            //MessageBox.Show(key);
             return (XOR(Pbox(Sbox(f(Pbox_Ext(L), key))), R) + L);
         }
         private string Pbox(string input)
@@ -413,6 +370,4 @@ namespace Lab1IvanovAGBBO0118DES
                 "After that, select the necessary number of rounds, as well as the password for decryption, and press the 'Decrypt' button. You will get the decrypted text in the bottom line.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
-
-
 }
