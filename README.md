@@ -1,4 +1,4 @@
-# Cryptography_DES_IvanovA
+# Cryptography DES algotihm
 Realization of DES encryption algorithm by me (2021)
 - How to encrypt?
 First, you need to enter the text you want to encrypt in the top line. 
