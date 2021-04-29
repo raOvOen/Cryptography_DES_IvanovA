@@ -322,12 +322,12 @@ namespace Lab1IvanovAGBBO0118DES
         {
             if (radioButton1.Checked == true)
             {
-                if(textBox4.TextLength %8 != 0) { MessageBox.Show("Указанная длина ключа не кратна 8-и!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
+                if(textBox4.TextLength %8 != 0) { MessageBox.Show("The key length is not a multiple of 8!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
                 sizeOfChar = 8;
             }
             else 
             {
-                if (textBox4.TextLength % 4 != 0) { MessageBox.Show("Указанная длина ключа не кратна 4-и!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
+                if (textBox4.TextLength % 4 != 0) { MessageBox.Show("The key length is not a multiple of 4!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
                 sizeOfChar = 16; 
             }
             string mainstr = textBox1.Text;
@@ -353,12 +353,12 @@ namespace Lab1IvanovAGBBO0118DES
         {
             if (radioButton1.Checked == true)
             {
-                if (textBox4.TextLength % 8 != 0) { MessageBox.Show("Указанная длина ключа не кратна 8-и!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
+                if (textBox4.TextLength % 8 != 0) { MessageBox.Show("The key length is not a multiple of 8!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
                 sizeOfChar = 8;
             }
             else
             {
-                if (textBox4.TextLength % 4 != 0) { MessageBox.Show("Указанная длина ключа не кратна 4-и!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
+                if (textBox4.TextLength % 4 != 0) { MessageBox.Show("The key length is not a multiple of 4!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); goto error; }
                 sizeOfChar = 16;
             }
             string mainstr = textBox1.Text; // Считываем строку
